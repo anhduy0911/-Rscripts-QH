@@ -1,0 +1,12 @@
+en_ssa_ga <- read.csv('./data2/predict_val_0.csv')
+en_ssa <- read.csv('./data2/predict_val_0_vanilla.csv')
+
+en_ssa_ga$date <- as.Date(en_ssa_ga$date, '%d/%m/%Y')
+par(cex.lab=1.5, cex.axis=1.2, mar=c(4,6,2,2))
+plot(real_h[100:199] ~ date[0:100], en_ssa_ga, type = "l", xlab='Time', ylab='Water Level (H)', col='red', lwd=1.5)
+lines(en_ssa_ga$date[0:100], en_ssa_ga$ensemble_h[100:199], col='blue', lwd=1.5)
+lines(en_ssa_ga$date[0:100], en_ssa$ensemble_h[100:199], col='green', lwd=1.5)
+legend( 'topright', legend=c('Groundtruth', 'Ensemble SSA with Attention', 'Ensemble SSA'),
+        col=c("red", 'blue', 'green')
+        ,lty=1:1, cex=1)
+# axis(1, en_ssa_ga$date, format(en_ssa_ga$date, "%b %d"), cex.axis = .7)

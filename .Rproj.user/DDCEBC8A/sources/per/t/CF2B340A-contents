@@ -1,0 +1,37 @@
+
+### export to eps 
+setEPS()
+
+#### set the margin 
+par(mar=c(0, 0, 0, 0) )
+par(mgp = c(0, 0, 0))
+
+#### the name, and sizes of the exported file 
+postscript("n_legend2.eps",height=3, width=15)
+
+### define the plot area 
+plot(1, type="n", axes=FALSE, xlab="", ylab="")
+
+#### define the colors 
+colors_border <- c("#2a16db", "#a83df5", "#ed82c4","#00AFBB", "#FC4E07", "#ed9482")
+
+
+
+### plot the legend
+### use expression to express the math formulars 
+### col is the colors 
+### pch=c(0,1,2,4,6) is the id list of the used point types  
+### lty=c(1,2,3,4,5) is the id list of the used line types 
+### cex is the size 
+### ncol is the number of colums. In this example, we have 5 series, then by using "ncol=5" we will have a horizontal legend 
+legtext <- c('Ensemble SSA GA', 'Ensemble SSA', 'Ensemble', 'LSTM', 'ANN', 'ARIMA')
+xcoords <- c(0.1, 0.1, 0.15, 0.16, 0.15, 0.15)
+secondvector <- (1:length(legtext))-1
+textwidths <- xcoords/secondvector # this works for all but the first element
+textwidths[1] <- 0 # so replace element 1 with a finite number (any will do)
+
+legend(1,1, legend=legtext, 
+       pch=20, col=colors_border, xjust=0.5, yjust=0.5, ncol=6, text.col = "black", cex=0.9, pt.cex=1.6, text.width=textwidths, xpd = TRUE)
+#y.intersp=0.5, 
+### export to eps 
+dev.off()
